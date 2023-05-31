@@ -54,7 +54,7 @@ function JobList() {
       <div className="job-posting">
         <h2>{job.title}</h2>
         {job.tag === "정규직" ? (
-          <div className="job-type full-time">정규직2</div>
+          <div className="job-type full-time">정규직</div>
         ) : null}
         {job.tag === "계약직" ? (
           <div className="job-type contract">계약직</div>
