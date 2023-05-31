@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./css/JobList.css";
 
@@ -44,39 +44,89 @@ function JobList() {
         "지원 자격: 영업 분야 경력 5년 이상, IT 제품에 대한 이해도 보유",
     },
   ];
+  const [tag, setTag] = useState("전체");
+  const selectTag = (event) => {
+    setTag(event.target.value);
+  };
+
+  function Job({ job }) {
+    return (
+      <div className="job-posting">
+        <h2>{job.title}</h2>
+        {job.tag === "정규직" ? (
+          <div className="job-type full-time">정규직</div>
+        ) : null}
+        {job.tag === "계약직" ? (
+          <div className="job-type contract">계약직</div>
+        ) : null}
+        {job.tag === "인턴쉽" ? (
+          <div className="job-type internship">인턴쉽</div>
+        ) : null}
+        {job.tag === "단기계약직" ? (
+          <div className="job-type part-time">단기계약직</div>
+        ) : null}
+
+        <div>
+          <p>{job.content}</p>
+        </div>
+        <div>
+          <p>{job.content2}</p>
+        </div>
+      </div>
+    );
+  }
+
+  const filteredJobs =
+    tag === "전체" ? jobs : jobs.filter((job) => job.tag === tag);
+
   return (
     <div className="container">
       <h1>채용 공고</h1>
-      {jobs.map((job) => (
+      <div className="selectTag">
+        <strong>공고 모아보기 </strong>
+        <button onClick={selectTag} value={"전체"} className="job-type">
+          전체
+        </button>
+        <button
+          onClick={selectTag}
+          value={"정규직"}
+          className="job-type full-time"
+        >
+          정규직
+        </button>
+        <button
+          onClick={selectTag}
+          value={"계약직"}
+          className="job-type contract"
+        >
+          계약직
+        </button>
+        <button
+          onClick={selectTag}
+          value={"인턴쉽"}
+          className="job-type internship"
+        >
+          인턴쉽
+        </button>
+        <button
+          onClick={selectTag}
+          value={"단기계약직"}
+          className="job-type part-time"
+        >
+          단기계약직
+        </button>
+      </div>
+      {filteredJobs.map((job) => (
         <Link
           to={"/detail"}
           state={{ title: job.title, tag: job.tag, content: job.content }}
           style={{ textDecoration: "none" }}
+          key={job.title}
         >
-          <div className="job-posting">
-            <h2>{job.title}</h2>
-            {job.tag === "정규직" ? (
-              <div className="job-type full-time">정규직</div>
-            ) : null}
-            {job.tag === "계약직" ? (
-              <div className="job-type contract">계약직</div>
-            ) : null}
-            {job.tag === "인턴쉽" ? (
-              <div className="job-type internship">인턴쉽</div>
-            ) : null}
-            {job.tag === "단기계약직" ? (
-              <div className="job-type part-time">단기계약직</div>
-            ) : null}
-
-            <div>
-              <p>{job.content}</p>
-            </div>
-            <div>
-              <p>{job.content2}</p>
-            </div>
-          </div>
+          <Job job={job} />
         </Link>
       ))}
+
       <div class="pagination">
         <button>&laquo;</button>
         <button class="active">1</button>

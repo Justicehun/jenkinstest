@@ -48,16 +48,16 @@ h1 {
   border-radius: 5px;
   margin-right: 10px;
 }
-.job-posting .job-type.full-time {
+.job-type.full-time {
   background-color: #2980b9;
 }
-.job-posting .job-type.part-time {
+.job-type.part-time {
   background-color: #27ae60;
 }
-.job-posting .job-type.contract {
+.job-type.contract {
   background-color: #c0392b;
 }
-.job-posting .job-type.internship {
+.job-type.internship {
   background-color: #9b59b6;
 }
 .pagination {
@@ -83,4 +83,22 @@ h1 {
 .pagination button:hover {
   background-color: #555;
   color: #fff;
+}
+.selectTag button {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 5px;
+}
+
+.selectTag .job-type {
+  display: inline-block;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.selectTag .job-type:hover {
+  transform: scale(1.03);
 }
